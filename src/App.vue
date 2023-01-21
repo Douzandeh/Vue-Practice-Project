@@ -1,27 +1,31 @@
 <template>
   <h1>{{ title }}</h1>
-<Modal :header="header" :text="text" theme = "sale"/>
+  <p>Welcome...</p>
+  <div v-if="showModal">
+      <Modal :header="header" :text="text" theme="sale" @close="changeModal" />
+  </div>
+  <button @click.alt="changeModal">Show Modal (alt + click right)</button>
 </template>
 
 <script>
-import Modal from "./components/Modal.vue"
+import Modal from "./components/Modal.vue";
 
 export default {
   name: "App",
-  components: {Modal},
+  components: { Modal },
   data() {
     return {
+      title: "My vue App",
       header: "Sign up for a Giveaway",
-      text: "Grab the course for half price"
+      text: "Grab the course for half price",
+      showModal: false,
     };
   },
   methods: {
-    handelEvent(){
-      console.log("event");
-      console.log(this.$refs.name);
-      this.$refs.name.classList.add("Ali")
+    changeModal(){
+      this.showModal = !this.showModal
     }
-  }
+  },
 };
 </script>
 
