@@ -1,7 +1,7 @@
 <template>
   <h1>{{ title }}</h1>
   <p>Welcome...</p>
-  <div v-if="showModal">
+  <teleport to=".modals" v-if="showModal">
     <Modal theme="sale" @close="changeModal">
       <h1>OpenCode Giveaway</h1>
       <p>Grab the course for half price</p>
@@ -10,8 +10,16 @@
         <a href="#">More info</a>
       </template>
     </Modal>
-  </div>
+  </teleport>
+
+  <teleport to=".modals" v-if="showModalTwo">
+    <Modal theme="" @close="changeModalTwo">
+      <h1>Sign up for news</h1>
+      <p>dont lose any news</p>
+    </Modal>
+  </teleport>
   <button @click.alt="changeModal">Show Modal (alt + click right)</button>
+  <button @click="changeModalTwo">Show Modal</button>
 </template>
 
 <script>
@@ -24,18 +32,22 @@ export default {
     return {
       title: "My vue App",
       showModal: false,
+      showModalTwo: false
     };
   },
   methods: {
     changeModal() {
       this.showModal = !this.showModal;
     },
+    changeModalTwo(){
+      this.showModalTwo = !this.showModalTwo;
+    }
   },
 };
 </script>
 
 <style>
-#app {
+#app , .modals {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
