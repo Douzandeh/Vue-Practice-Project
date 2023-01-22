@@ -2,7 +2,14 @@
   <h1>{{ title }}</h1>
   <p>Welcome...</p>
   <div v-if="showModal">
-      <Modal :header="header" :text="text" theme="sale" @close="changeModal" />
+    <Modal theme="sale" @close="changeModal">
+      <h1>OpenCode Giveaway</h1>
+      <p>Grab the course for half price</p>
+      <template v-slot:links>
+        <a href="#">Sign up</a>
+        <a href="#">More info</a>
+      </template>
+    </Modal>
   </div>
   <button @click.alt="changeModal">Show Modal (alt + click right)</button>
 </template>
@@ -16,15 +23,13 @@ export default {
   data() {
     return {
       title: "My vue App",
-      header: "Sign up for a Giveaway",
-      text: "Grab the course for half price",
       showModal: false,
     };
   },
   methods: {
-    changeModal(){
-      this.showModal = !this.showModal
-    }
+    changeModal() {
+      this.showModal = !this.showModal;
+    },
   },
 };
 </script>
